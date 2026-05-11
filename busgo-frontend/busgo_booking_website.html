@@ -995,5 +995,32 @@ document.querySelectorAll('.offer-code-pill').forEach(el=>{
   });
 });
 </script>
+<script>
+const form = document.querySelector("form");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const inputs = form.querySelectorAll("input");
+
+  const data = {
+    name: inputs[0].value + " " + inputs[1].value,
+    email: inputs[3].value,
+    password: inputs[4].value
+  };
+
+  const response = await fetch("http://65.2.142.227:2000/api/auth/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  });
+
+  const result = await response.json();
+
+  alert(result.message);
+});
+</script>
 </body>
 </html>
